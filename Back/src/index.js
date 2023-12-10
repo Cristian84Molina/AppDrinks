@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express();
+const routes = require('./routes/indexRoutes');
 const morgan = require("morgan");
 require('dotenv').config();
 const {conex} = require('./dbConex');
@@ -20,6 +21,8 @@ router.use((req, res, next) => {
 router.use(express.json());
 router.use(express.urlencoded({ extended: false }));
 router.use(morgan("dev"));
+
+router.use(routes);
 
 conex.sync({ alter: true }).then(() => {
     router.listen(port, () => {
