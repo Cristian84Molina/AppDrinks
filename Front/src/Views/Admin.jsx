@@ -8,6 +8,7 @@ const Admin = () =>{
         <div>
             <NavBarAdmin />
             <SideBarAmin />
+            
 
         </div>
     )
