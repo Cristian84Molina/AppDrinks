@@ -18,6 +18,12 @@ function Drinks() {
     setSumaPrecios((prevSumaPrecios) => prevSumaPrecios - trago.precio);
   }
 
+  function borrarTodosLosTragos() {
+    setSelectedDrinks([]);
+    setConteo(0);
+    setSumaPrecios(0);
+  }
+
   function guardarTrago(trago) {
     setSelectedDrinks((prevSelectedDrinks) => [...prevSelectedDrinks, trago]);
     setConteo((prev) => prev + 1);
@@ -26,7 +32,15 @@ function Drinks() {
   return (
     <div className="grid grid-cols-3 gap-">
       <div className="col-span-2 bg-white  rounded-[50px] m-4 flex flex-col justify-start max-w-[700px] ">
-        <h2 className="text-[50px] font-fredericka">Drinks</h2>
+        <div className="w-full flex justify-around ml-9">
+          <h2 className="text-[50px] font-fredericka">Drinks</h2>
+          <div className="flex justify-sdt items-center">
+            <input
+              placeholder="Buscar trago"
+              className="p-3 border border-1 border-gray-400 rounded-lg h-[50%] "
+            ></input>
+          </div>
+        </div>
         <div className="grid grid-cols-2">
           {drinks.map((drink, index) => (
             <div key={index} className="m-3 ">
@@ -68,6 +82,7 @@ function Drinks() {
           selectedDrinks={selectedDrinks}
           conteo={conteo}
           total={sumaPrecio}
+          borrarTodosLosTragos={borrarTodosLosTragos}
         />
       </div>
     </div>
