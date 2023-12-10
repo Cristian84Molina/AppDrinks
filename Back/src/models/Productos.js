@@ -39,7 +39,6 @@ module.exports = (sequelize) => {
         preparacion: {
             type: DataTypes.STRING,
             allowNull: true,
-            defaultValue: '',
         },
  
     },{tableName: 'productos'},
