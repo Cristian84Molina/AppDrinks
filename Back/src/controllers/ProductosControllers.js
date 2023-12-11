@@ -27,6 +27,15 @@ const getProductosxLinea = async(id) => {
        ]
     });
     return array;
- };
+};
 
-module.exports = {getProductosAll, addProducto, getProductosxLinea};
+const getProductosById = async(id) => {
+   const idreg = Number(id);
+   const array = await productos.findByPk(idreg)
+   return array;
+};
+
+module.exports = {getProductosAll, 
+                  addProducto,
+                  getProductosById,
+                  getProductosxLinea};
