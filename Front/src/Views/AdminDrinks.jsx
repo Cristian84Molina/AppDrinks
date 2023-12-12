@@ -9,7 +9,6 @@ const AdminDrinks = () =>{
         <div>
             <NavBarAdmin />
             <SideBarAmin />
-            <Drinks />
         </div>
     )
 
