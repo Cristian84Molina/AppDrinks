@@ -10,6 +10,14 @@ const SideBarAmin = () => {
   return (
     <div className="bg-black w-64 h-screen border-t-4 border-white p-10">
       <ul>
+      <li>
+          <Link
+            className="font-fredericka text-white text-2xl "
+            to="/admin/drinks"
+          >
+            Drinks
+          </Link>
+        </li>
         <li>
           <Link
             className="font-fredericka text-white text-2xl "

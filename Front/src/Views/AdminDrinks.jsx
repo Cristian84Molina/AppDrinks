@@ -1,16 +1,18 @@
 import NavBarAdmin from "../Components/NavBarAdmin"
 import SideBarAmin from "../Components/SidebarAdmin"
+import Drinks from "../Components/Drinks"
 
-const Admin = () =>{
+const AdminDrinks = () =>{
     
 
     return (
         <div>
             <NavBarAdmin />
             <SideBarAmin />
+            <Drinks />
         </div>
     )
 
 }
 
-export default Admin
+export default AdminDrinks
