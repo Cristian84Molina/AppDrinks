@@ -1,6 +1,7 @@
 const express = require("express");
 const {getProductosAll, getProductosxLinea,
-       addProducto, getProductosById} = require('../controllers/ProductosControllers');
+       addProducto, getProductosById,
+       updateProducto} = require('../controllers/ProductosControllers');
 const server = express();
 
 server.get('/', async(req, res) => {
@@ -43,6 +44,15 @@ server.post('/', async(req, res) => {
     };
 });
 
-
+server.put('/:id', async(req, res) => {
+    const datos = req.body;   
+    const {id} = req.params;
+    try {
+        const result = await updateProducto(datos, id);
+        res.status(200).json(result); 
+    } catch (error) {
+        res.status(500).json({message: error.message});         
+    };
+});
 
 module.exports = server;
