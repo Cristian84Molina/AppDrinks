@@ -8,7 +8,7 @@ const port = process.env.PORT_SERVER || 3002;
 
 //midleweares
 router.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Credentials", "true");
     res.header(
       "Access-Control-Allow-Headers",
@@ -29,3 +29,4 @@ conex.sync({ alter: true }).then(() => {
       console.log(`Server Running on port ${port}`);
    });
 });
+
