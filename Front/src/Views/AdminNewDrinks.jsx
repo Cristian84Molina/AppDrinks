@@ -1,11 +1,13 @@
 // Importaciones
-import { useForm } from "react-hook-form";
+import {useEffect, useState } from 'react'
+import { useForm} from "react-hook-form";
 import NavBarAdmin from "../Components/NavBarAdmin";
 import SideBarAmin from "../Components/SidebarAdmin";
 import axios from "axios";
 
 const AdminNewDrinks = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+
 
   const handleAddNewDrink = async (data) => {
     try {
@@ -17,6 +19,26 @@ const AdminNewDrinks = () => {
       // Manejar errores aquí
     }
   };
+
+  const [lineas, setLineas] = useState([]);
+
+  useEffect(() => {
+    // Función asincrónica para obtener las líneas desde el backend
+    const fetchLineas = async () => {
+      try {
+        const response = await axios.get("http://localhost:3002/lineas");
+        setLineas(response.data);
+      } catch (error) {
+        console.error("Error fetching lines:", error);
+        // Manejar errores aquí
+      }
+    };
+
+    // Llamar a la función para obtener las líneas al cargar el componente
+    fetchLineas();
+  }, []);
+
+  
 
   return (
     <div>
@@ -113,15 +135,20 @@ const AdminNewDrinks = () => {
                 </div>
 
                 <div className="mb-4">
-                  <label htmlFor="linea_id" className="block text-sm font-medium text-gray-600">Línea ID</label>
-                  <input
-                    type="text"
-                    id="linea_id"
-                    {...register("linea_id", { required: true })}
-                    className="mt-1 p-2 w-full border rounded-md"
-                  />
-                  {errors.linea_id && <span className="text-red-500">Este campo es requerido</span>}
-                </div>
+        <label htmlFor="linea_id" className="block text-sm font-medium text-gray-600">Línea</label>
+        <select
+          id="linea_id"
+          {...register("linea_id", { required: true })}
+          className="mt-1 p-2 w-full border rounded-md"
+        >
+          {lineas.map((linea) => (
+            <option key={linea.id} value={linea.id}>
+              {linea.name}
+            </option>
+          ))}
+        </select>
+        {errors.linea_id && <span className="text-red-500">Este campo es requerido</span>}
+      </div>
               </div>
             </div>
 
