@@ -8,7 +8,7 @@ const EditProduct = ({ productId, onClose, onUpdate }) => {
     name: "",
     preparacion: "",
     precioventa: 0,
-    // ... otros campos
+    image:"",
   });
 
   useEffect(() => {
@@ -76,7 +76,17 @@ const EditProduct = ({ productId, onClose, onUpdate }) => {
               className="mt-1 p-2 w-full border rounded-md"
             />
           </div>
-          {/* Agregar más campos según la estructura de tu producto */}
+          <div className="mb-4">
+            <label htmlFor="image" className="block text-sm font-medium text-gray-600">URL de la Imagen</label>
+            <input
+              type="text"
+              id="image"
+              name="image"
+              value={productData.image}
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border rounded-md"
+            />
+          </div>
           <div className="flex justify-end">
             <button
               type="button"
