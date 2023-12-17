@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 //import drinks from "../json/drinks.json";
 import Ticket from "./Ticket";
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getArticles } from "../Redux/actions";
 
 function Drinks() {
@@ -12,12 +12,11 @@ function Drinks() {
   const [conteo, setConteo] = useState(0);
   const [sumaPrecio, setSumaPrecios] = useState(0);
   const dispatch = useDispatch();
-  console.log("Tragos", rutaPpal)
+  console.log("Tragos", rutaPpal);
 
   //useEffect(() => {
   //   dispatch(getArticles(rutaPpal));
   //}, []);
-
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -34,7 +33,6 @@ function Drinks() {
     };
     fetchProductos();
   }, []);
-
 
   function eliminarTrago(trago) {
     const eliminarTragoSelec = selectedDrinks.filter((selectedDrink) => {
@@ -71,32 +69,41 @@ function Drinks() {
           </div>
         </div>
         <div className="grid grid-cols-2">
-          {drinks.map((drink, index) => (
-            <div key={index} className="m-3 ">
-              <button
-                onClick={() => {
-                  guardarTrago({ id: drink.id, nombre: drink.name, precio: drink.precioventa });
-                }}
-                className="hover:bg-sky-300 p-2 w-full rounded flex flex-col-2 gap-2"
-              >
-                <div>
-                  <img
-                    className="rounded-lg max-w-[100px] max-h-[100px]"
-                    src={drink.image}
-                    alt={drink.name}
-                  />
-                </div>
+          {drinks.map(
+            (drink, index) =>
+              // Agrega una condición para verificar si la propiedad active es 0
+              // Si es 0, el elemento no se mostrará
+              drink.active !== 0 && (
+                <div key={index} className="m-3">
+                  <button
+                    onClick={() => {
+                      guardarTrago({
+                        id: drink.id,
+                        nombre: drink.name,
+                        precio: drink.precioventa,
+                      });
+                    }}
+                    className="hover:bg-sky-300 p-2 w-full rounded flex flex-col-2 gap-2"
+                  >
+                    <div>
+                      <img
+                        className="rounded-lg max-w-[100px] max-h-[100px]"
+                        src={drink.image}
+                        alt={drink.name}
+                      />
+                    </div>
 
-                <div className="flex flex-col gap-2  items-start justify-center">
-                  <h6 className="font-semibold">{drink.name}</h6>
-                  <h6 className="text-sm text-gray-700 text-left">
-                      {drink.preparacion}
-                  </h6>
-                  <h6>${drink.precioventa}</h6>
+                    <div className="flex flex-col gap-2 items-start justify-center">
+                      <h6 className="font-semibold">{drink.name}</h6>
+                      <h6 className="text-sm text-gray-700 text-left">
+                        {drink.preparacion}
+                      </h6>
+                      <h6>${drink.precioventa}</h6>
+                    </div>
+                  </button>
                 </div>
-              </button>
-            </div>
-          ))}
+              )
+          )}
         </div>
       </div>
       <div className="col-span-1">
@@ -113,7 +120,6 @@ function Drinks() {
 }
 
 export default Drinks;
-
 
 /*
 {drink.ingredientes.map((ing, index) => (
