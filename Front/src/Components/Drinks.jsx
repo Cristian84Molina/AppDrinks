@@ -1,11 +1,40 @@
-import { useState } from "react";
-import drinks from "../json/drinks.json";
+import { useState, useEffect } from "react";
+//import drinks from "../json/drinks.json";
 import Ticket from "./Ticket";
+import {useSelector, useDispatch} from "react-redux";
+import { getArticles } from "../Redux/actions";
 
 function Drinks() {
+  const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
+  //const drinks = useSelector((state) => state.rutaReducer.articlesList);
+  const [drinks, setDrinks] = useState([]);
   const [selectedDrinks, setSelectedDrinks] = useState([]);
   const [conteo, setConteo] = useState(0);
   const [sumaPrecio, setSumaPrecios] = useState(0);
+  const dispatch = useDispatch();
+  console.log("Tragos", rutaPpal)
+
+  //useEffect(() => {
+  //   dispatch(getArticles(rutaPpal));
+  //}, []);
+
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch(`${rutaPpal}productos`);
+        if (!response.ok) {
+          throw new Error("Error al obtener los productos");
+        }
+        const data = await response.json();
+        setDrinks(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchProductos();
+  }, []);
+
 
   function eliminarTrago(trago) {
     const eliminarTragoSelec = selectedDrinks.filter((selectedDrink) => {
@@ -46,30 +75,24 @@ function Drinks() {
             <div key={index} className="m-3 ">
               <button
                 onClick={() => {
-                  guardarTrago({ nombre: drink.nombre, precio: drink.precio });
+                  guardarTrago({ id: drink.id, nombre: drink.name, precio: drink.precioventa });
                 }}
                 className="hover:bg-sky-300 p-2 w-full rounded flex flex-col-2 gap-2"
               >
                 <div>
                   <img
                     className="rounded-lg max-w-[100px] max-h-[100px]"
-                    src={`${drink.imagen}`}
-                    alt={drink.nombre}
+                    src={drink.image}
+                    alt={drink.name}
                   />
                 </div>
 
                 <div className="flex flex-col gap-2  items-start justify-center">
-                  <h6 className="font-semibold">{drink.nombre}</h6>
+                  <h6 className="font-semibold">{drink.name}</h6>
                   <h6 className="text-sm text-gray-700 text-left">
-                    {drink.ingredientes.map((ing, index) => (
-                      <span className="" key={index}>
-                        {index === drink.ingredientes.length - 1
-                          ? `${ing}. `
-                          : `${ing}, `}
-                      </span>
-                    ))}
+                      {drink.preparacion}
                   </h6>
-                  <h6>${drink.precio}</h6>
+                  <h6>${drink.precioventa}</h6>
                 </div>
               </button>
             </div>
@@ -90,3 +113,14 @@ function Drinks() {
 }
 
 export default Drinks;
+
+
+/*
+{drink.ingredientes.map((ing, index) => (
+  <span className="" key={index}>
+    {index === drink.ingredientes.length - 1
+      ? `${ing}. `
+      : `${ing}, `}
+  </span>
+))}
+*/

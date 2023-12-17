@@ -10,7 +10,16 @@ const Admin = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(9);
   const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
-  
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = productos.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+
+
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -24,20 +33,14 @@ const Admin = () => {
         console.error(error);
       }
     };
-
     fetchProductos();
   }, []);
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = productos.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const [selectedProductId, setSelectedProductId] = useState(null);
+
+
+
 
   const handleModificar = (id) => {
     console.log("ID seleccionado en handleModificar:", id);
