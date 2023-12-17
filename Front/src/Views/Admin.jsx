@@ -80,7 +80,8 @@ const Admin = () => {
             )}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-            {currentProducts.map((producto) => (
+            {currentProducts
+            .sort((a, b) => a.linea_id - b.linea_id).map((producto) => (
               <div
                 key={producto.id}
                 className="bg-white p-4 shadow-md rounded-md flex"
