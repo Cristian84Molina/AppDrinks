@@ -92,13 +92,15 @@ const Admin = () => {
                   className="mr-4 rounded-md h-16 w-16 object-cover"
                 />
                 <div>
-                  <a
-                    href="#"
-                    className="text-xl font-semibold mb-2 text-blue-500 hover:underline"
-                    onClick={() => handleModificar(producto.id)}
-                  >
-                    {producto.name}
-                  </a>
+                <a
+    href="#"
+    className={`text-xl font-semibold mb-2 hover:underline ${
+      producto.active === 0 ? 'text-red-500' : 'text-blue-500'
+    }`}
+    onClick={() => handleModificar(producto.id)}
+  >
+    {producto.name}
+  </a>
                   <p className="text-gray-700">{producto.preparacion}</p>
                   <p className="text-green-600 font-semibold mt-2">
                     ${producto.precioventa}
