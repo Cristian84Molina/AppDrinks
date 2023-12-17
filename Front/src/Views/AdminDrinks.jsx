@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react";
 import NavBarAdmin from "../Components/NavBarAdmin";
 import SideBarAmin from "../Components/SidebarAdmin";
 import axios from "axios";
@@ -149,3 +149,4 @@ const AdminDrinks = () => {
 };
 
 export default AdminDrinks;
+ */

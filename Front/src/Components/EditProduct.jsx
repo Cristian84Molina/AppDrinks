@@ -9,6 +9,7 @@ const EditProduct = ({ productId, onClose, onUpdate }) => {
     preparacion: "",
     precioventa: 0,
     image:"",
+    active: 0,
   });
 
   useEffect(() => {
@@ -86,6 +87,19 @@ const EditProduct = ({ productId, onClose, onUpdate }) => {
               onChange={handleInputChange}
               className="mt-1 p-2 w-full border rounded-md"
             />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="active" className="block text-sm font-medium text-gray-600">Activo</label>
+            <select
+              id="active"
+              name="active"
+              value={productData.active}
+              onChange={handleInputChange}
+              className="mt-1 p-2 w-full border rounded-md"
+            >
+              <option value={1}>Sí</option>
+              <option value={0}>No</option>
+            </select>
           </div>
           <div className="flex justify-end">
             <button

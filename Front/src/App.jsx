@@ -3,7 +3,7 @@ import {Routes,Route} from "react-router-dom"
 import Login from './Views/Login'
 import Admin from './Views/Admin'
 import Home from "./Views/Home";
-import AdminDrinks from './Views/AdminDrinks';
+/* import AdminDrinks from './Views/AdminDrinks'; */
 import AdminNewDrinks from './Views/AdminNewDrinks';
 
 
