@@ -3,16 +3,18 @@ import axios from "axios";
 import NavBarAdmin from "../Components/NavBarAdmin";
 import SideBarAdmin from "../Components/SidebarAdmin";
 import EditProduct from "../Components/EditProduct";
+import {useSelector} from "react-redux";
 
 const Admin = () => {
   const [productos, setProductos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(9);
-
+  const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
+  
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await fetch("http://localhost:3002/productos");
+        const response = await fetch(`${rutaPpal}productos`);
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
         }
@@ -110,7 +112,7 @@ const Admin = () => {
           onUpdate={() => {
             // Actualizar la lista de productos después de la edición
             axios
-              .get("http://localhost:3002/productos")
+              .get(`${rutaPpal}productos`)
               .then((response) => {
                 setProductos(response.data);
               })

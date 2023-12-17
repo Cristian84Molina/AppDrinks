@@ -26,9 +26,9 @@ function Ticket({
   };
 
   const confirmarEliminarTrago = (trago) => {
-    if (window.confirm(`¿Estás seguro de eliminar el trago ${trago.nombre}?`)) {
+    //if (window.confirm(`¿Estás seguro de eliminar el trago ${trago.nombre}?`)) {
       eliminarTrago(trago);
-    }
+    //}
   };
 
   return (
