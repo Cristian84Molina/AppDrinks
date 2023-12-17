@@ -1,8 +1,8 @@
 const {Router} = require('express');
 const router = Router();
-const LineasRouter = require('../handlers/LineasHandlers');
-const ProductosRouter = require("../handlers/ProductosHandlers");
-const CajeroRouter = require("../handlers/CajeroHandlers");
+const LineasRouter = require('../handlers/LineasHandlers.js');
+const ProductosRouter = require('../handlers/ProductosHandlers.js')
+const CajeroRouter = require("../handlers/CajeroHandlers.js");
 
 
 router.use('/lineas', LineasRouter);
