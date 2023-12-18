@@ -27,19 +27,19 @@ function Ticket({
 
   const confirmarEliminarTrago = (trago) => {
     //if (window.confirm(`¿Estás seguro de eliminar el trago ${trago.nombre}?`)) {
-      eliminarTrago(trago);
+    eliminarTrago(trago);
     //}
   };
 
   return (
     <>
-      <div className="bg-white h-[70%] rounded-[50px] p-3 m-4 flex flex-col justify-start max-w-[500px] ">
+      <div className="bg-white h-full rounded-[50px] p-3 m-4 flex flex-col justify-start max-w-[500px]">
         <h2 className="text-[50px] font-fredericka">Ticket</h2>
         <div>{formattedDate}</div>
         <div className="w-full flex items-center justify-center pt-3">
           <div className="w-[80%] flex items-center bg-gray-700 h-[2px]"></div>
         </div>
-        <div className="text-xl flex flex-cols-7 justify-around h-[80%]">
+        <div className="text-xl flex flex-cols-7 justify-around h-[80%] overflow-y-auto max-h-[300px]">
           <ul className="flex flex-col justify-start  mt-3 items-start col-span-3">
             {selectedDrinks.map((selectedDrink, index) => (
               <div className="flex flex-row gap-2" key={index}>
@@ -54,7 +54,7 @@ function Ticket({
             ))}
           </ul>
 
-          <ul className="flex flex-col justify-start  mt-3 items-start col-span-3">
+          <ul className="flex flex-col justify-start   items-start col-span-3">
             {selectedDrinks.map((selectedDrink, index) => (
               <li key={index}>$ {selectedDrink.precio}</li>
             ))}
@@ -65,7 +65,7 @@ function Ticket({
           <div>Total: {total}</div>
         </div>
       </div>
-      <div className="my-4 flex justify-around">
+      <div className=" flex justify-around">
         <button
           onClick={confirmarBorrarTodos}
           className="font-fredericka rounded-lg w-[40%] bg-red-500 px-2 hover:bg-red-600  font-bold text-[20px] hover:scale-105 transition"
@@ -80,4 +80,4 @@ function Ticket({
   );
 }
 
-export default Ticket
+export default Ticket;
