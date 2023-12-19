@@ -18,24 +18,22 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      // Realiza una solicitud a la API para autenticar al usuario utilizando Axios
-      const response = await axios.get('http://localhost:3002/cajeros', {
-        name,
-        password,
-      });
+        const response = await axios.post('http://localhost:3002/cajeros/authenticate', {
+            name,
+            password,
+        });
 
-      if (response.status === 200) {
-        // Autenticación exitosa, redirige a la página de inicio
-        redirectToHome();
-      } else {
-        // Autenticación fallida, puedes manejar el error aquí
-        console.error('Error de autenticación:', response.statusText);
-      }
+        if (response.status === 200) {
+            redirectToHome();
+        } else {
+            console.error('Error de autenticación:', response.data.message);
+            // Mostrar mensaje de error al usuario
+        }
     } catch (error) {
-      // Maneja el error de autenticación aquí
-      console.error('Error al autenticar:', error.message);
+        console.error('Error al autenticar:', error.message);
+        // Mostrar mensaje de error al usuario
     }
-  };
+};
 
   const redirectToHome = () => {
     // Redirige a la página de inicio ("/home")
