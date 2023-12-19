@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import users from '../Components/users';
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleUsernameChange = (e) => {
     setName(e.target.value);
@@ -16,24 +17,23 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = async () => {
-    try {
-        const response = await axios.post('http://localhost:3002/cajeros/authenticate', {
-            name,
-            password,
-        });
-
-        if (response.status === 200) {
-            redirectToHome();
-        } else {
-            console.error('Error de autenticación:', response.data.message);
-            // Mostrar mensaje de error al usuario
-        }
-    } catch (error) {
-        console.error('Error al autenticar:', error.message);
-        // Mostrar mensaje de error al usuario
+  const handleLogin = () => {
+    // Verifica que ambos campos no estén vacíos
+    if (!name || !password) {
+      setError('Por favor, completa ambos campos.');
+      return;
     }
-};
+
+    // Verifica las credenciales con el array de usuarios
+    const user = users.find((u) => u.name === name && u.password === password);
+
+    if (user) {
+      setError(''); // Reinicia el mensaje de error en caso de éxito
+      redirectToHome();
+    } else {
+      setError('Credenciales incorrectas');
+    }
+  };
 
   const redirectToHome = () => {
     // Redirige a la página de inicio ("/home")
@@ -73,6 +73,7 @@ const Login = () => {
               className="text-black text-lg md:text-xl font-sans form-input mt-1 block w-full"
             />
           </label>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <button
             type="button"
             onClick={handleLogin}

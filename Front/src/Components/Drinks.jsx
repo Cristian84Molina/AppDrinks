@@ -52,8 +52,8 @@ function Drinks() {
   }
 
   return (
-    <div className="grid grid-cols-3 h-[70%]">
-      <div className="col-span-2 bg-white  rounded-[50px] m-4 flex flex-col justify-start max-w-[700px] ">
+    <div className="grid grid-cols-3 h-[80%]">
+      <div className="col-span-2 bg-white h-[100%]  rounded-[50px] m-4 flex flex-col justify-start max-w-[900px] overflow-hidden">
         <div className="w-full flex justify-around ml-9">
           <h2 className="text-[50px] font-fredericka">Drinks</h2>
           <div className="flex justify-sdt items-center">
@@ -65,7 +65,7 @@ function Drinks() {
             ></input>
           </div>
         </div>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-3 overflow-y-auto">
           {drinks
             .filter((drink) =>
               drink.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -80,11 +80,11 @@ function Drinks() {
                       precio: drink.precioventa,
                     });
                   }}
-                  className="hover:bg-sky-300 p-2 w-full rounded flex flex-col-2 gap-2"
+                  className="hover:bg-sky-300 p-2 shadow-md rounded-md flex"
                 >
                   <div>
                     <img
-                      className="rounded-lg max-w-[100px] max-h-[100px]"
+                      className= "mr-4 rounded-md h-16 w-16 object-cover"
                       src={drink.image}
                       alt={drink.name}
                     />

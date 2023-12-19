@@ -14,7 +14,7 @@ server.post('/', async(req, res) => {
     }
 });
 
-server.get('/', async(req, res) => {
+server.get('/users', async(req, res) => {
     try {
         const result = await getAllcajeros();
         res.status(200).json(result);

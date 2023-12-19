@@ -39,7 +39,7 @@ function Ticket({
         <div className="w-full flex items-center justify-center pt-3">
           <div className="w-[80%] flex items-center bg-gray-700 h-[2px]"></div>
         </div>
-        <div className="text-xl flex flex-cols-7 justify-around h-[80%] overflow-y-auto max-h-[300px]">
+        <div className="text-xl flex flex-cols-7 justify-around h-[80%] overflow-y-scroll max-h-[220px]">
           <ul className="flex flex-col justify-start  mt-3 items-start col-span-3">
             {selectedDrinks.map((selectedDrink, index) => (
               <div className="flex flex-row gap-2" key={index}>
@@ -60,11 +60,16 @@ function Ticket({
             ))}
           </ul>
         </div>
+        <div className="w-full flex items-center justify-center pt-3">
+          <div className="w-[80%] flex items-center bg-gray-700 h-[2px] m-2"></div>
+        </div>
         <div className="flex flex-col-2 justify-around text-xl font-bold w-full ">
           <div>Cantidad: {conteo}</div>
           <div>Total: {total}</div>
         </div>
-      </div>
+        <div className="w-full flex items-center justify-center pt-3">
+          <div className="w-[80%] flex items-center bg-gray-700 h-[2px] m-2"></div>
+        </div>
       <div className=" flex justify-around">
         <button
           onClick={confirmarBorrarTodos}
@@ -75,6 +80,7 @@ function Ticket({
         <button className="font-fredericka rounded-lg w-[40%] bg-sky-500 py-2 hover:bg-sky-600 hover:scale-105 transition font-bold text-[30px]">
           Cobrar
         </button>
+      </div>
       </div>
     </>
   );
