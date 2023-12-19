@@ -3,7 +3,7 @@ import axios from "axios";
 import NavBarAdmin from "../Components/NavBarAdmin";
 import SideBarAdmin from "../Components/SidebarAdmin";
 import EditProduct from "../Components/EditProduct";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const Admin = () => {
   const [productos, setProductos] = useState([]);
@@ -18,7 +18,6 @@ const Admin = () => {
   );
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [selectedProductId, setSelectedProductId] = useState(null);
-
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -35,12 +34,6 @@ const Admin = () => {
     };
     fetchProductos();
   }, []);
-
-
-
-
-
-
 
   const handleModificar = (id) => {
     console.log("ID seleccionado en handleModificar:", id);
@@ -81,33 +74,34 @@ const Admin = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
             {currentProducts
-            .sort((a, b) => a.linea_id - b.linea_id).map((producto) => (
-              <div
-                key={producto.id}
-                className="bg-white p-4 shadow-md rounded-md flex"
-              >
-                <img
-                  src={producto.image}
-                  alt={producto.name}
-                  className="mr-4 rounded-md h-16 w-16 object-cover"
-                />
-                <div>
-                <a
-    href="#"
-    className={`text-xl font-semibold mb-2 hover:underline ${
-      producto.active === 0 ? 'text-red-500' : 'text-blue-500'
-    }`}
-    onClick={() => handleModificar(producto.id)}
-  >
-    {producto.name}
-  </a>
-                  <p className="text-gray-700">{producto.preparacion}</p>
-                  <p className="text-green-600 font-semibold mt-2">
-                    ${producto.precioventa}
-                  </p>
+              .sort((a, b) => a.linea_id - b.linea_id)
+              .map((producto) => (
+                <div
+                  key={producto.id}
+                  className="bg-white p-4 shadow-md rounded-md flex"
+                >
+                  <img
+                    src={producto.image}
+                    alt={producto.name}
+                    className="mr-4 rounded-md h-16 w-16 object-cover"
+                  />
+                  <div>
+                    <a
+                      href="#"
+                      className={`text-xl font-semibold mb-2 hover:underline ${
+                        producto.active === 0 ? "text-red-500" : "text-blue-500"
+                      }`}
+                      onClick={() => handleModificar(producto.id)}
+                    >
+                      {producto.name}
+                    </a>
+                    <p className="text-gray-700">{producto.preparacion}</p>
+                    <p className="text-green-600 font-semibold mt-2">
+                      ${producto.precioventa}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
