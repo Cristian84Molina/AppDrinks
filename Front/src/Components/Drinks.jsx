@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getArticles } from "../Redux/actions";
 
 function Drinks() {
+  // fesfsefesf
   const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
   const [drinks, setDrinks] = useState([]);
   const [selectedDrinks, setSelectedDrinks] = useState([]);
