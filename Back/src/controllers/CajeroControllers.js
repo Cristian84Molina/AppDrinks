@@ -19,5 +19,14 @@ const getCajeroById = async (id) => {
     return cajero;
 
 }
+const getCajeroByName = async (name) => {
+    const cajero = await cajeros.findOne({
+        where: {
+            name: name
+        }
+    });
+    return cajero;
 
-module.exports = { createCajeros, getAllcajeros, getCajeroById };
+}
+
+module.exports = { createCajeros, getAllcajeros, getCajeroById, getCajeroByName };

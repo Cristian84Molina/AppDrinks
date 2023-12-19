@@ -6,6 +6,10 @@ require('dotenv').config();
 const {conex} = require('./dbConex');
 const port = process.env.PORT_SERVER || 3002;
 
+const cors = require('cors');
+
+router.use(cors())
+
 //midleweares
 router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
