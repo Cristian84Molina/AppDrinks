@@ -10,7 +10,7 @@ const CardDrink = () => {
   useEffect(() => {
     // Llamada a la API para obtener productos
     axios
-      .get(`${rutaPpal}productos`) // Asegúrate de cambiar la URL si es diferente
+      .get("http://localhost:3002/productos") // Asegúrate de cambiar la URL si es diferente
       .then((response) => {
         setProductos(response.data);
       })

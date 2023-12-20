@@ -1,4 +1,5 @@
-import React from "react";
+import { useState } from "react";
+import Modal from "react-modal";
 
 function Ticket({
   selectedDrinks,
@@ -19,6 +20,8 @@ function Ticket({
   };
   const formattedDate = today.toLocaleDateString("es-ES", options);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const confirmarBorrarTodos = () => {
     if (window.confirm("¿Estás seguro de borrar todos los tragos?")) {
       borrarTodosLosTragos();
@@ -29,6 +32,19 @@ function Ticket({
     //if (window.confirm(`¿Estás seguro de eliminar el trago ${trago.nombre}?`)) {
     eliminarTrago(trago);
     //}
+  };
+
+  const handleCobrarClick = () => {
+    // Abre la ventana modal al hacer clic en "Cobrar"
+    setModalIsOpen(true);
+  };
+
+  const imprimirEnComandera = () => {
+    // Implementa la lógica específica para imprimir en la comandera
+    // ...
+
+    // Cierra la ventana modal después de imprimir
+    setModalIsOpen(false);
   };
 
   return (
@@ -70,17 +86,62 @@ function Ticket({
         <div className="w-full flex items-center justify-center pt-3">
           <div className="w-[80%] flex items-center bg-gray-700 h-[2px] m-2"></div>
         </div>
-      <div className=" flex justify-around">
+        <div className=" flex justify-around">
+          <button
+            onClick={confirmarBorrarTodos}
+            className="font-fredericka rounded-lg w-[40%] bg-red-500 px-2 hover:bg-red-600  font-bold text-[20px] hover:scale-105 transition"
+          >
+            Borrar todo
+          </button>
+          <button
+            onClick={handleCobrarClick}
+            className="font-fredericka rounded-lg w-[40%] bg-sky-500 py-2 hover:bg-sky-600 hover:scale-105 transition font-bold text-[30px]"
+          >
+            Cobrar
+          </button>
+        </div>
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 print:hidden">
+  <Modal
+    isOpen={modalIsOpen}
+    onRequestClose={() => setModalIsOpen(false)}
+    contentLabel="Comanda"
+    className="w-72 print:w-full bg-gray-100 p-4 rounded-md shadow-xl border border-black absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+  >
+    <div>
+      <h2 className="text-lg font-bold mb-2">Comanda</h2>
+      
+      <p className="mb-2">{formattedDate}</p>
+      <div className="w-full flex items-center justify-center ">
+          <div className="w-[100%] flex items-center bg-gray-700 h-[2px] "></div>
+        </div>
+      <ul>
+        {selectedDrinks.map((selectedDrink, index) => (
+          <li key={index} className="mb-1">
+            {selectedDrink.nombre} - ${selectedDrink.precio}
+          </li>
+        ))}
+      </ul>
+      <div className="w-full flex items-center justify-center ">
+          <div className="w-[100%] flex items-center bg-gray-700 h-[2px] "></div>
+        </div>
+      <p className="mb-2">Cantidad: {conteo}</p>
+      <div className="w-full flex items-center justify-center ">
+          <div className="w-[100%] flex items-center bg-gray-700 h-[2px] "></div>
+        </div>
+      <p className="mb-2 text-center font-bold text-lg">Total: ${total}</p>
+      <div className="flex justify-center items-center">
         <button
-          onClick={confirmarBorrarTodos}
-          className="font-fredericka rounded-lg w-[40%] bg-red-500 px-2 hover:bg-red-600  font-bold text-[20px] hover:scale-105 transition"
+          onClick={imprimirEnComandera}
+          className="bg-blue-500 text-white px-4 py-2 rounded"
         >
-          Borrar todo
-        </button>
-        <button className="font-fredericka rounded-lg w-[40%] bg-sky-500 py-2 hover:bg-sky-600 hover:scale-105 transition font-bold text-[30px]">
-          Cobrar
+          Imprimir
         </button>
       </div>
+    </div>
+  </Modal>
+</div>
+
+
       </div>
     </>
   );

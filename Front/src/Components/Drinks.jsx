@@ -25,14 +25,18 @@ function Drinks() {
           throw new Error("Error al obtener los productos");
         }
         const data = await response.json();
-        setOriginalDrinks(data); // Actualiza la copia original de los productos
-        setDrinks(data); // Inicialmente muestra todos los productos
+  
+        // Filtra los productos por la propiedad active antes de asignarlos
+        const filteredDrinks = data.filter((drink) => drink.active === 1);
+  
+        setOriginalDrinks(filteredDrinks); // Actualiza la copia original de los productos
+        setDrinks(filteredDrinks); // Inicialmente muestra solo productos activos
       } catch (error) {
         console.error(error);
       }
     };
     fetchProductos();
-  }, [rutaPpal]);
+  }, []);
 
   useEffect(() => {
     const fetchLineas = async () => {
@@ -120,7 +124,7 @@ function Drinks() {
               (drink) =>
                 (selectedLinea === "Todas las líneas" ||
                   drink.linea_id === parseInt(selectedLinea)) &&
-                drink.name.toLowerCase().includes(searchTerm.toLowerCase())
+                drink.name.toLowerCase().includes(searchTerm.toLowerCase()) 
             )
             .map((drink, index) => (
               <div key={index} className="m-3">
@@ -168,12 +172,3 @@ function Drinks() {
 }
 
 export default Drinks;
-/*
-{drink.ingredientes.map((ing, index) => (
-  <span className="" key={index}>
-    {index === drink.ingredientes.length - 1
-      ? `${ing}. `
-      : `${ing}, `}
-  </span>
-))}
-*/
