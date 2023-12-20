@@ -6,11 +6,20 @@ import { useForm } from "react-hook-form";
 
 function Drinks() {
   const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
+  //cargamos el localstorage
+  let localStorageJSON = localStorage.getItem("Carrito");
+  let storedItems = [];
+  if(localStorageJSON!==null) {
+       storedItems = JSON.parse(localStorageJSON); 
+  };
+  let suma = 0;
+  storedItems.forEach(ele => {suma+=ele.precio});
+
   const [originalDrinks, setOriginalDrinks] = useState([]); // Mantén una copia original de los productos
   const [drinks, setDrinks] = useState([]);
-  const [selectedDrinks, setSelectedDrinks] = useState([]);
-  const [conteo, setConteo] = useState(0);
-  const [sumaPrecio, setSumaPrecios] = useState(0);
+  const [selectedDrinks, setSelectedDrinks] = useState(storedItems);
+  const [conteo, setConteo] = useState(storedItems.length);
+  const [sumaPrecio, setSumaPrecios] = useState(suma);
   const [searchTerm, setSearchTerm] = useState("");
   const [lineas, setLineas] = useState([]);
   const [selectedLinea, setSelectedLinea] = useState("Todas las líneas");
@@ -77,19 +86,58 @@ function Drinks() {
     setSelectedDrinks(eliminarTragoSelec);
     setConteo((prevConteo) => prevConteo - 1);
     setSumaPrecios((prevSumaPrecios) => prevSumaPrecios - trago.precio);
-  }
+    let localStorageJSON = localStorage.getItem("Carrito");
+    let storedItems = [];
+    if(localStorageJSON!==null) {
+       storedItems = JSON.parse(localStorageJSON); 
+    };
+    const array = storedItems.filter((ele)=> ele.registro !== trago.registro);
+    const updatedItemsJSON = JSON.stringify(array);
+    localStorage.setItem("Carrito", updatedItemsJSON);
+  };
 
   function borrarTodosLosTragos() {
     setSelectedDrinks([]);
     setConteo(0);
     setSumaPrecios(0);
+    let storedItems = [];
+    const updatedItemsJSON = JSON.stringify(storedItems);
+    localStorage.setItem("Carrito", updatedItemsJSON);
   }
 
   function guardarTrago(trago) {
-    setSelectedDrinks((prevSelectedDrinks) => [...prevSelectedDrinks, trago]);
+    let nreg = 0;
+    selectedDrinks.forEach(ele =>{
+       nreg = ele.registro;
+    });
+    nreg++;
+    const newTrago = {registro: nreg,
+                      id: trago.id,
+                      name: trago.name,
+                      precio: trago.precio}
+
+    setSelectedDrinks((prevSelectedDrinks) => [...prevSelectedDrinks, newTrago]);
     setConteo((prev) => prev + 1);
     setSumaPrecios((prev) => prev + trago.precio);
-  }
+    addLocalStorage(newTrago);
+  };
+
+  const addLocalStorage = (trago) => {
+    let localStorageJSON = localStorage.getItem("Carrito");
+    let storedItems = [];
+    if(localStorageJSON!==null) {
+       storedItems = JSON.parse(localStorageJSON); 
+    };
+    const nitem = {registro: trago.registro,
+                   id: trago.id,
+                   name: trago.name,
+                   precio: trago.precio,
+                   cantidad: 1,}   
+    storedItems.push(nitem);
+    const updatedItemsJSON = JSON.stringify(storedItems);
+    localStorage.setItem("Carrito", updatedItemsJSON);
+    console.log(storedItems);
+ };
 
   return (
     <div className="grid grid-cols-3 h-[80%]">
@@ -131,8 +179,9 @@ function Drinks() {
                 <button
                   onClick={() => {
                     guardarTrago({
+                      registro: 0,
                       id: drink.id,
-                      nombre: drink.name,
+                      name: drink.name,
                       precio: drink.precioventa,
                     });
                   }}

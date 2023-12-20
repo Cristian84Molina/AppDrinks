@@ -65,7 +65,7 @@ function Ticket({
                 >
                   x
                 </button>
-                <li>{selectedDrink.nombre}</li>
+                <li>{selectedDrink.name}</li>
               </div>
             ))}
           </ul>
@@ -117,7 +117,7 @@ function Ticket({
       <ul>
         {selectedDrinks.map((selectedDrink, index) => (
           <li key={index} className="mb-1">
-            {selectedDrink.nombre} - ${selectedDrink.precio}
+            {selectedDrink.name} - ${selectedDrink.precio}
           </li>
         ))}
       </ul>
