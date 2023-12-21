@@ -5,6 +5,7 @@ import Admin from './Views/Admin'
 import Home from "./Views/Home";
 /* import AdminDrinks from './Views/AdminDrinks'; */
 import AdminNewDrinks from './Views/AdminNewDrinks';
+import Facturacion from './Views/Facturacion';
 
 
 
@@ -19,6 +20,7 @@ function App() {
       <Route exact path="/home" element={<Home />} />
       <Route exact path="/admin/drinks" element={<Admin />} />
       <Route exact path='/admin/NewDrinks' element={<AdminNewDrinks />} />
+      <Route exact path="/facturar" element={<Facturacion />} />
       
     </Routes>
   )

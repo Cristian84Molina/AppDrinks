@@ -29,7 +29,7 @@ function Drinks() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await fetch('http://localhost:3002/productos');
+        const response = await fetch(`${rutaPpal}productos`);
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
         }
@@ -50,7 +50,7 @@ function Drinks() {
   useEffect(() => {
     const fetchLineas = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/lineas");
+        const response = await axios.get(`${rutaPpal}lineas`);
         setLineas(response.data);
       } catch (error) {
         console.error("Error fetching lines:", error);
@@ -114,7 +114,8 @@ function Drinks() {
     const newTrago = {registro: nreg,
                       id: trago.id,
                       name: trago.name,
-                      precio: trago.precio}
+                      precio: trago.precio,
+                      costo: trago.costo}
 
     setSelectedDrinks((prevSelectedDrinks) => [...prevSelectedDrinks, newTrago]);
     setConteo((prev) => prev + 1);
@@ -132,7 +133,8 @@ function Drinks() {
                    id: trago.id,
                    name: trago.name,
                    precio: trago.precio,
-                   cantidad: 1,}   
+                   cantidad: 1,
+                   costo: trago.costo}   
     storedItems.push(nitem);
     const updatedItemsJSON = JSON.stringify(storedItems);
     localStorage.setItem("Carrito", updatedItemsJSON);
@@ -183,6 +185,7 @@ function Drinks() {
                       id: drink.id,
                       name: drink.name,
                       precio: drink.precioventa,
+                      costo: drink.preciocosto,
                     });
                   }}
                   className="hover:bg-sky-300 p-2 shadow-md rounded-md flex"

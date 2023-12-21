@@ -13,6 +13,11 @@ const createFormaspago = async (datos) => {
         maneja_ctabanco
     });
     return newFormaspago;
-}
+};
 
-module.exports = { createFormaspago };
+const getFormasPago = async() => {
+   const array = await formaspago.findAll();
+   return array;
+};
+
+module.exports = { createFormaspago, getFormasPago };
