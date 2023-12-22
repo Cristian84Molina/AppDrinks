@@ -7,6 +7,8 @@ import Home from "./Views/Home";
 import AdminNewDrinks from './Views/AdminNewDrinks';
 import Facturacion from './Views/Facturacion';
 import Estadisticas from './Views/Estadisticas';
+import EstadisticasFecha from './Components/EstadisticaFecha';
+import EstadisticasDrinks from './Components/EstadisticaDrinks';
 
 
 
@@ -22,7 +24,9 @@ function App() {
       <Route exact path="/admin/drinks" element={<Admin />} />
       <Route exact path='/admin/NewDrinks' element={<AdminNewDrinks />} />
       <Route exact path="/facturar" element={<Facturacion />} />
-      <Route exact path="/admin/estadisticas/fecha" element={<Estadisticas />} />
+      <Route exact path="/admin/estadisticas" element={<Estadisticas />} />
+      <Route exact path="/admin/estadisticas/fecha" element={<EstadisticasFecha />} />
+      <Route exact path="/admin/estadisticas/drinks" element={<EstadisticasDrinks />} />
     </Routes>
   )
 }

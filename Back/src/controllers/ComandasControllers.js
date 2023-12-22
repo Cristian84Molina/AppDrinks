@@ -62,10 +62,38 @@ const addComanda = async(datos) => {
    });
    return grabado;
 };
+const getComandaByID = async(id) => {
+   const idreg = Number(id);
+   const array = await comandas.findByPk(idreg, {
+      include: [
+         {
+           model: itemcomandas,
+           include: [
+             {
+               model: productos,
+             },
+           ],
+         },
+      ],
+   });
+   return array;
+};
+
 
 const findAllComandas = async () => {
    try {
-     const result = await comandas.findAll();
+     const result = await comandas.findAll({
+       include: [
+         {
+           model: itemcomandas,
+           include: [
+             {
+               model: productos,
+             },
+           ],
+         },
+       ],
+     });
      return result;
    } catch (error) {
      console.error('Error al buscar todas las comandas:', error);
@@ -73,4 +101,4 @@ const findAllComandas = async () => {
    }
  };
 
-module.exports = {addComanda, findAllComandas};
+module.exports = {addComanda, findAllComandas, getComandaByID};

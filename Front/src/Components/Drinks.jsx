@@ -203,9 +203,9 @@ function Drinks() {
 
                   <div className="flex flex-col gap-2 items-start justify-center">
                     <h6 className="font-semibold">{drink.name}</h6>
-                    <h6 className="text-sm text-gray-700 text-left">
+                    {/* <h6 className="text-sm text-gray-700 text-left">
                       {drink.preparacion}
-                    </h6>
+                    </h6> */}
                     <h6>${drink.precioventa}</h6>
                   </div>
                 </button>

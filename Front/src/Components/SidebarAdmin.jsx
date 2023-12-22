@@ -27,13 +27,13 @@ const SideBarAmin = () => {
           </Link>
         </li>
         <li>
-          <Link className="font-fredericka text-white text-2xl " onClick={toggleLista}>
+          <Link className="font-fredericka text-white text-2xl " to="/admin/estadisticas" onClick={toggleLista}>
             Estadisticas
           </Link>
           {mostrarLista && (
             <ul>
               <li>
-                <Link className="font-fredericka text-white text-xl " to="/admin/estadisticas/drink">. Drinks</Link>
+                <Link className="font-fredericka text-white text-xl " to="/admin/estadisticas/drinks">. Drinks</Link>
               </li>
               
               <li>
