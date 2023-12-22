@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             allowNull: false,
         },
+        valor: {
+            type: DataTypes.DOUBLE,
+            defaultValue: 0,
+        },
         anulado: {
             type: DataTypes.INTEGER,
             allowNull: false,

@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             allowNull: false,
         },
+        numero: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         bruto: {
             type: DataTypes.DOUBLE,
             allowNull: false,

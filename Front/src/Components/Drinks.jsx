@@ -114,6 +114,7 @@ function Drinks() {
     const newTrago = {registro: nreg,
                       id: trago.id,
                       name: trago.name,
+                      impuesto: trago.impuesto,
                       precio: trago.precio,
                       costo: trago.costo}
 
@@ -132,6 +133,7 @@ function Drinks() {
     const nitem = {registro: trago.registro,
                    id: trago.id,
                    name: trago.name,
+                   impuesto: trago.impuesto,
                    precio: trago.precio,
                    cantidad: 1,
                    costo: trago.costo}   
@@ -184,6 +186,7 @@ function Drinks() {
                       registro: 0,
                       id: drink.id,
                       name: drink.name,
+                      impuesto: drink.impuesto,
                       precio: drink.precioventa,
                       costo: drink.preciocosto,
                     });
