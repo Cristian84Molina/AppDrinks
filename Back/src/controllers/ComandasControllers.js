@@ -10,7 +10,7 @@ const devuelveNumero = async() =>{
     };
     let n = Number(numero)+1;
     numero = n.toString().padStart(10,'0');
-    return num;
+    return numero;
 }; 
 
 
@@ -37,7 +37,7 @@ const addComanda = async(datos) => {
          preciocosto: ele.preciocosto,
          valorunitario: ele.valorunitario,
          impuesto: ele.impuesto,
-         comanda_id: grabado,id,
+         comanda_id: grabado.id,
          producto_id: ele.producto_id,
          cajero_id,
       };
@@ -57,4 +57,14 @@ const addComanda = async(datos) => {
    return grabado;
 };
 
-module.exports = {addComanda};
+const findAllComandas = async () => {
+   try {
+     const result = await comandas.findAll();
+     return result;
+   } catch (error) {
+     console.error('Error al buscar todas las comandas:', error);
+     throw error; // Puedes manejar el error según tus necesidades
+   }
+ };
+
+module.exports = {addComanda, findAllComandas};
