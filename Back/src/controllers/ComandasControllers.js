@@ -63,4 +63,14 @@ const addComanda = async(datos) => {
    return grabado;
 };
 
-module.exports = {addComanda};
+const findAllComandas = async () => {
+   try {
+     const result = await comandas.findAll();
+     return result;
+   } catch (error) {
+     console.error('Error al buscar todas las comandas:', error);
+     throw error; // Puedes manejar el error según tus necesidades
+   }
+ };
+
+module.exports = {addComanda, findAllComandas};

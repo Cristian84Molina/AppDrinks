@@ -1,5 +1,5 @@
 const express = require("express");
-const {addComanda} = require('../controllers/ComandasControllers');
+const {addComanda, findAllComandas} = require('../controllers/ComandasControllers');
 const server = express();
 
 server.post('/', async(req, res) => {
@@ -9,6 +9,15 @@ server.post('/', async(req, res) => {
        res.status(200).json(result);
    } catch (error) {
        res.status(500).json({message: error.message});
+   }
+});
+
+server.get('/', async(req, res) => {
+   try {
+      const result = await findAllComandas();
+      res.status(200).json(result);
+   } catch (error) {
+      res.status(500).json({message: error.message});
    }
 });
 

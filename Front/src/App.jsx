@@ -6,6 +6,7 @@ import Home from "./Views/Home";
 /* import AdminDrinks from './Views/AdminDrinks'; */
 import AdminNewDrinks from './Views/AdminNewDrinks';
 import Facturacion from './Views/Facturacion';
+import Estadisticas from './Views/Estadisticas';
 
 
 
@@ -21,7 +22,7 @@ function App() {
       <Route exact path="/admin/drinks" element={<Admin />} />
       <Route exact path='/admin/NewDrinks' element={<AdminNewDrinks />} />
       <Route exact path="/facturar" element={<Facturacion />} />
-      
+      <Route exact path="/admin/estadisticas/fecha" element={<Estadisticas />} />
     </Routes>
   )
 }

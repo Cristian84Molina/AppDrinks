@@ -33,10 +33,11 @@ const SideBarAmin = () => {
           {mostrarLista && (
             <ul>
               <li>
-                <Link className="font-fredericka text-white text-xl " to="">. Drinks</Link>
+                <Link className="font-fredericka text-white text-xl " to="/admin/estadisticas/drink">. Drinks</Link>
               </li>
+              
               <li>
-                <Link className="font-fredericka text-white text-xl " to="">. Fechas</Link>
+                <Link className="font-fredericka text-white text-xl " to="/admin/estadisticas/fecha">. Fechas</Link>
               </li>
               
             </ul>
