@@ -9,6 +9,7 @@ import Facturacion from './Views/Facturacion';
 import Estadisticas from './Views/Estadisticas';
 import EstadisticasFecha from './Components/EstadisticaFecha';
 import EstadisticasDrinks from './Components/EstadisticaDrinks';
+import CierreDia from './Views/CierreDia';
 
 
 
@@ -27,6 +28,7 @@ function App() {
       <Route exact path="/admin/estadisticas" element={<Estadisticas />} />
       <Route exact path="/admin/estadisticas/fecha" element={<EstadisticasFecha />} />
       <Route exact path="/admin/estadisticas/drinks" element={<EstadisticasDrinks />} />
+      <Route exact path="/cierre" element={<CierreDia />} />
     </Routes>
   )
 }

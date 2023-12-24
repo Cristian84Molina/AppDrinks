@@ -1,16 +1,13 @@
-const { comandas, itemcomandas, productos, conex, detaformaspago } = require('../dbConex');
+const { comandas, itemcomandas, productos, conex, detaformaspago,formaspago } = require('../dbConex');
 
 const devuelveNumero = async() =>{
-    const array = comandas.findAll();
-    let numero = '0000000000';
-    if(array.length) {
-       await array.forEach(ele => {
-          numero = ele.numero;
-       });
-    };
-    let n = Number(numero)+1;
-    numero = n.toString().padStart(10,'0');
-    return numero;
+   const maxNumber = await comandas.max('numero');
+   let numero = maxNumber || '0000000000';
+
+   let n = Number(numero) + 1;
+   numero = n.toString().padStart(10, '0');
+
+   return numero;
 }; 
 
 
@@ -81,24 +78,33 @@ const getComandaByID = async(id) => {
 
 
 const findAllComandas = async () => {
-   try {
-     const result = await comandas.findAll({
-       include: [
-         {
-           model: itemcomandas,
-           include: [
-             {
-               model: productos,
-             },
-           ],
-         },
-       ],
-     });
-     return result;
-   } catch (error) {
-     console.error('Error al buscar todas las comandas:', error);
-     throw error; // Puedes manejar el error según tus necesidades
-   }
- };
+  try {
+    const result = await comandas.findAll({
+      include: [
+        {
+          model: itemcomandas,
+          include: [
+            {
+              model: productos,
+            },
+          ],
+        },
+        {
+          model: detaformaspago,
+          include: [
+            {
+              model: formaspago,
+            },
+          ],
+        },
+      ],
+    });
+    return result;
+  } catch (error) {
+    console.error('Error al buscar todas las comandas:', error);
+    throw error; // Puedes manejar el error según tus necesidades
+  }
+};
+
 
 module.exports = {addComanda, findAllComandas, getComandaByID};

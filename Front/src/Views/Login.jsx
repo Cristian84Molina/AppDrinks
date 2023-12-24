@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import NavBarAdmin from '../Components/NavBarAdmin';
 import users from '../Components/users';
 
 const Login = () => {
@@ -8,6 +9,13 @@ const Login = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [userRole, setUserRole] = useState('');
+
+  useEffect(() => {
+    if (userRole === 'admin') {
+      navigate('/admin');
+    }
+  }, [userRole, navigate]);
 
   const handleUsernameChange = (e) => {
     setName(e.target.value);
@@ -28,8 +36,18 @@ const Login = () => {
     const user = users.find((u) => u.name === name && u.password === password);
 
     if (user) {
-      setError(''); // Reinicia el mensaje de error en caso de éxito
-      redirectToHome();
+      setUserRole(user.role);
+  
+      // Verifica el tipo de usuario
+      if (user.role === 'admin') {
+        // Usuario administrador, redirige a la ruta "/admin"
+        navigate('/admin');
+      } else if (user.role === 'cajero') {
+        // Usuario cajero, redirige a la página sin acceso al administrador
+        redirectToHome();
+      } else {
+        setError('Credenciales incorrectas');
+      }
     } else {
       setError('Credenciales incorrectas');
     }
@@ -83,6 +101,7 @@ const Login = () => {
           </button>
         </form>
       </div>
+      {userRole && <NavBarAdmin userRole={userRole} />}
     </div>
   );
 };
