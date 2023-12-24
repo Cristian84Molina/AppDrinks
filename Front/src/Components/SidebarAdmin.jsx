@@ -43,6 +43,12 @@ const SideBarAmin = () => {
             </ul>
           )}
         </li>
+        <br />
+        <br />
+        <Link className="bg-slate-200 font-fredericka text-lg text-black px-4 py-2 rounded" to="/">
+  Salir
+</Link>
+
       </ul>
     </div>
   );

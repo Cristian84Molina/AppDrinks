@@ -22,7 +22,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await fetch("http://localhost:3002/productos");
+        const response = await fetch(`${rutaPpal}productos`);
         if (!response.ok) {
           throw new Error("Error al obtener los productos");
         }
@@ -112,7 +112,7 @@ const Admin = () => {
           onUpdate={() => {
             // Actualizar la lista de productos después de la edición
             axios
-              .get("http://localhost:3002/productos")
+              .get(`${rutaPpal}productos`)
               .then((response) => {
                 setProductos(response.data);
               })

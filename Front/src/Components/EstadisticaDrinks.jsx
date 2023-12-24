@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import NavBarAdmin from "./NavBarAdmin";
 import SideBarAdmin from "./SidebarAdmin";
+import { useSelector } from "react-redux";
 
 const EstadisticasDrinks = () => {
   const [data, setData] = useState([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [topProducts, setTopProducts] = useState([]);
+  const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `http://localhost:3002/comandas?startDate=${startDate}&endDate=${endDate}`;
+        const url = `${rutaPpal}comandas?startDate=${startDate}&endDate=${endDate}`;
         const response = await fetch(url);
         const result = await response.json();
         setData(result);
@@ -88,30 +90,33 @@ const EstadisticasDrinks = () => {
           </div>
 
           {/* Mostrar lista de productos más vendidos */}
-  <h2 className="text-2xl font-bold mb-4 text-black">
-    Productos más vendidos:
-  </h2>
+          <h2 className="text-2xl font-bold mb-4 text-black">
+            Productos más vendidos:
+          </h2>
           <div className="p-4 rounded-lg shadow-md max-w-md mx-auto overflow-y-auto max-h-96">
-  <ul>
-    {topProducts.map((product) => (
-      <li key={product.producto.id} className="flex items-center mb-4">
-        <img
-          src={product.producto.image}
-          alt={product.producto.name}
-          className="w-10 h-10 rounded-full mr-4"
-        />
-        <div>
-          <span className="font-bold text-black">
-            {product.producto.name}:
-          </span>{" "}
-          <span className="text-black">{product.cantidad} unidades</span>
-        </div>
-      </li>
-    ))}
-  </ul>
-</div>
-
-
+            <ul>
+              {topProducts.map((product) => (
+                <li
+                  key={product.producto.id}
+                  className="flex items-center mb-4"
+                >
+                  <img
+                    src={product.producto.image}
+                    alt={product.producto.name}
+                    className="w-10 h-10 rounded-full mr-4"
+                  />
+                  <div>
+                    <span className="font-bold text-black">
+                      {product.producto.name}:
+                    </span>{" "}
+                    <span className="text-black">
+                      {product.cantidad} unidades
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

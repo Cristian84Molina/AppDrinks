@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import SideBarAdmin from "./SidebarAdmin";
 import NavBarAdmin from "./NavBarAdmin";
+import { useSelector } from "react-redux";
 
 const EstadisticasFecha = () => {
   const [data, setData] = useState([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `http://localhost:3002/comandas?startDate=${startDate}&endDate=${endDate}`;
+        const url = `${rutaPpal}comandas?startDate=${startDate}&endDate=${endDate}`;
         const response = await fetch(url);
         const result = await response.json();
         setData(result);

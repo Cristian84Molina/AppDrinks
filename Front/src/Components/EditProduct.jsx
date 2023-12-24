@@ -1,8 +1,10 @@
 // EditProduct.js
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const EditProduct = ({ productId, onClose, onUpdate }) => {
+  const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
   const [productData, setProductData] = useState({
     // Definir la estructura de los datos del producto
     name: "",
@@ -14,7 +16,7 @@ const EditProduct = ({ productId, onClose, onUpdate }) => {
 
   useEffect(() => {
     // Cargar los datos del producto para editar
-    axios.get(`http://localhost:3002/productos/${productId}`)
+    axios.get(`${rutaPpal}productos/${productId}`)
       .then((response) => {
         setProductData(response.data);
       })
@@ -30,7 +32,7 @@ const EditProduct = ({ productId, onClose, onUpdate }) => {
 
   const handleUpdate = () => {
     // Lógica para actualizar el producto en la base de datos
-    axios.put(`http://localhost:3002/productos/${productId}`, productData)
+    axios.put(`${rutaPpal}productos/${productId}`, productData)
       .then(() => {
         onUpdate(); // Actualizar la lista de productos en la vista principal
         onClose(); // Cerrar el formulario de edición

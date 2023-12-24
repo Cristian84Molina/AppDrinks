@@ -5,12 +5,12 @@ import {useSelector} from "react-redux";
 const CardDrink = () => {
   const [productos, setProductos] = useState([]);
   const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
-  const tragosSelected = useSelector((state) => state.rutaReducer.tragosSelected);
+  //const tragosSelected = useSelector((state) => state.rutaReducer.tragosSelected);
 
   useEffect(() => {
     // Llamada a la API para obtener productos
     axios
-      .get("http://localhost:3002/productos") // Asegúrate de cambiar la URL si es diferente
+      .get(`${rutaPpal}productos`) // Asegúrate de cambiar la URL si es diferente
       .then((response) => {
         setProductos(response.data);
       })

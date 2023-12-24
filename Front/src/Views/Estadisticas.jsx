@@ -2,17 +2,19 @@ import { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import NavBarAdmin from "../Components/NavBarAdmin";
 import SideBarAdmin from "../Components/SidebarAdmin";
+import { useSelector } from "react-redux";
 
 const Estadisticas = () => {
   const [data, setData] = useState([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [chartData, setChartData] = useState({});
+  const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `http://localhost:3002/comandas?startDate=${startDate}&endDate=${endDate}`;
+        const url = `${rutaPpal}comandas?startDate=${startDate}&endDate=${endDate}`;
         const response = await fetch(url);
         const result = await response.json();
         setData(result);
@@ -25,7 +27,9 @@ const Estadisticas = () => {
         }, {});
 
         // Ordenar las fechas de menor a mayor
-        const sortedDates = Object.keys(groupedData).sort((a, b) => new Date(a) - new Date(b));
+        const sortedDates = Object.keys(groupedData).sort(
+          (a, b) => new Date(a) - new Date(b)
+        );
 
         const chartValues = sortedDates.map((date) => groupedData[date]);
 

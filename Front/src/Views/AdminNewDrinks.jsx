@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import NavBarAdmin from "../Components/NavBarAdmin";
 import SideBarAmin from "../Components/SidebarAdmin";
 import axios from "axios";
+import { useSelector } from "react-redux";
+
 
 const AdminNewDrinks = () => {
   const {
@@ -14,11 +16,12 @@ const AdminNewDrinks = () => {
 
   const [lineas, setLineas] = useState([]);
   const [isDrinkSaved, setIsDrinkSaved] = useState(false);
+  const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
 
   const handleAddNewDrink = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3002/productos",
+        `${rutaPpal}productos`,
         data
       );
       console.log("Nuevo trago agregado:", response.data);
@@ -39,7 +42,7 @@ const AdminNewDrinks = () => {
   useEffect(() => {
     const fetchLineas = async () => {
       try {
-        const response = await axios.get("http://localhost:3002/lineas");
+        const response = await axios.get(`${rutaPpal}lineas`);
         setLineas(response.data);
       } catch (error) {
         console.error("Error fetching lines:", error);

@@ -11,7 +11,7 @@ function Drinks() {
   let storedItems = [];
   if(localStorageJSON!==null) {
        storedItems = JSON.parse(localStorageJSON); 
-  };
+  }
   let suma = 0;
   storedItems.forEach(ele => {suma+=ele.precio});
 
@@ -90,11 +90,11 @@ function Drinks() {
     let storedItems = [];
     if(localStorageJSON!==null) {
        storedItems = JSON.parse(localStorageJSON); 
-    };
+    }
     const array = storedItems.filter((ele)=> ele.registro !== trago.registro);
     const updatedItemsJSON = JSON.stringify(array);
     localStorage.setItem("Carrito", updatedItemsJSON);
-  };
+  }
 
   function borrarTodosLosTragos() {
     setSelectedDrinks([]);
@@ -122,14 +122,14 @@ function Drinks() {
     setConteo((prev) => prev + 1);
     setSumaPrecios((prev) => prev + trago.precio);
     addLocalStorage(newTrago);
-  };
+  }
 
   const addLocalStorage = (trago) => {
     let localStorageJSON = localStorage.getItem("Carrito");
     let storedItems = [];
     if(localStorageJSON!==null) {
        storedItems = JSON.parse(localStorageJSON); 
-    };
+    }
     const nitem = {registro: trago.registro,
                    id: trago.id,
                    name: trago.name,
