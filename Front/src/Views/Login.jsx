@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBarAdmin from '../Components/NavBarAdmin';
 import users from '../Components/users';
@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if (userRole === 'admin') {
-      navigate('/admin');
+      navigate('/admin/drinks');
     }
   }, [userRole, navigate]);
 
@@ -41,7 +41,7 @@ const Login = () => {
       // Verifica el tipo de usuario
       if (user.role === 'admin') {
         // Usuario administrador, redirige a la ruta "/admin"
-        navigate('/admin');
+        navigate('admin/drinks');
       } else if (user.role === 'cajero') {
         // Usuario cajero, redirige a la página sin acceso al administrador
         redirectToHome();

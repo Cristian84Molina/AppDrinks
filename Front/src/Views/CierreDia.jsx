@@ -5,13 +5,26 @@ import { useSelector } from "react-redux";
 const CierreDia = () => {
   const obtenerFechaPorDefecto = () => {
     const fechaActual = new Date();
-    fechaActual.setDate(fechaActual.getDate() - 1); // Obtener el día anterior
-    return fechaActual.toISOString().slice(0, 10); // Formato "YYYY-MM-DD"
+    const fechaInicio = new Date();
+    const fechaFin = new Date();
+
+    // Establecer la hora de inicio a las 18:00 del día anterior
+    fechaInicio.setDate(fechaActual.getDate() - 1);
+    fechaInicio.setHours(16, 0, 0, 0);
+
+    // Establecer la hora de fin a las 11:00 del día actual
+    fechaFin.setHours(8, 0, 0, 0);
+
+    return {
+      startDate: fechaInicio.toISOString().slice(0, 16), // Formato "YYYY-MM-DDTHH:mm"
+      endDate: fechaFin.toISOString().slice(0, 16),
+    };
   };
 
+  const [dates, setDates] = useState(obtenerFechaPorDefecto());
+  const [startDate, setStartDate] = useState(dates.startDate);
+  const [endDate, setEndDate] = useState(dates.endDate);
   const [data, setData] = useState([]);
-  const [startDate, setStartDate] = useState(obtenerFechaPorDefecto());
-  const [endDate, setEndDate] = useState(new Date().toISOString().slice(0, 10));
   const [totalBruto, setTotalBruto] = useState(0);
   const [totalsByPayment, setTotalsByPayment] = useState({});
   const rutaPpal = useSelector((state) => state.rutaReducer.rutaPrincipal);
@@ -24,21 +37,17 @@ const CierreDia = () => {
         const result = await response.json();
 
         const filteredData = result.filter((item) => {
-          const itemDate = new Date(item.fecha).toISOString().slice(0, 10);
+          const itemDate = new Date(item.fecha).toISOString().slice(0, 16);
           return itemDate >= startDate && itemDate <= endDate;
         });
 
         setData(filteredData);
 
-        const totalBruto = filteredData.reduce(
-          (sum, item) => sum + item.bruto,
-          0
-        );
+        const totalBruto = filteredData.reduce((sum, item) => sum + item.bruto, 0);
         setTotalBruto(totalBruto);
 
         const totalsByPayment = filteredData.reduce((totals, item) => {
-          const formaPago =
-            item.detaformaspagos[0]?.formaspago?.name || "Sin especificar";
+          const formaPago = item.detaformaspagos[0]?.formaspago?.name || "Sin especificar";
           totals[formaPago] = (totals[formaPago] || 0) + item.bruto;
           return totals;
         }, {});
@@ -56,14 +65,14 @@ const CierreDia = () => {
       <div className="m-4 p-8 bg-white rounded shadow-md w-full">
         <div className="mb-6">
           <h2 className="text-lg font-bold mb-2">
-            Selecciona el Rango de Fecha:
+            Selecciona el Rango de Fecha y Hora:
           </h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label>
                 Inicio:
                 <input
-                  type="date"
+                  type="datetime-local"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
                   className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
@@ -74,7 +83,7 @@ const CierreDia = () => {
               <label>
                 Fin:
                 <input
-                  type="date"
+                  type="datetime-local"
                   value={endDate}
                   onChange={(e) => setEndDate(e.target.value)}
                   className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"

@@ -5,6 +5,8 @@ const morgan = require("morgan");
 require('dotenv').config();
 const {conex} = require('./dbConex');
 const port = process.env.PORT_SERVER || 3002;
+process.env.TZ = 'America/Argentina/Buenos_Aires';
+
 
 const cors = require('cors');
 
