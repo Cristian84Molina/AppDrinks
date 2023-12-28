@@ -13,7 +13,7 @@ const detaformaspagoModels = require('./models/DetaFormasPago');
 const cierrecajaModels = require('./models/CierreCaja');
 const transaccionesModels = require('./models/Transacciones');
 
-const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME, DB_DEPLOY} = process.env;
+//const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME, DB_DEPLOY} = process.env;
 
 
 /* const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
@@ -24,8 +24,8 @@ const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME, DB_DEPLOY} = process.env;
 
 }); */
 
+const {dbUrl} = process.env;
 
-const dbUrl = 'mysql://root:C1dda2AedGd4DBhbd624a6FHE5-bFfgd@viaduct.proxy.rlwy.net:23752/railway';
 
 const sequelize = new Sequelize(dbUrl, {
   dialect: 'mysql', // Asegúrate de especificar el dialecto correctamente
