@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express();
-const routes = require('./routes/indexRoutes');
+const routes = require('./src/routes/indexRoutes');
 const morgan = require("morgan");
 require('dotenv').config();
-const {conex} = require('./dbConex');
+const {conex} = require('./src/dbConex');
 const port = process.env.PORT_SERVER || 3002;
 process.env.TZ = 'America/Argentina/Buenos_Aires';
 
