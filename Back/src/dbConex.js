@@ -15,7 +15,6 @@ const transaccionesModels = require('./models/Transacciones');
 
 const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME} = process.env;
 
-//const {DB_DEPLOY} = process.env
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     host: DB_HOST,
