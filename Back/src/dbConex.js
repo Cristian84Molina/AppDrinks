@@ -13,16 +13,24 @@ const detaformaspagoModels = require('./models/DetaFormasPago');
 const cierrecajaModels = require('./models/CierreCaja');
 const transaccionesModels = require('./models/Transacciones');
 
-const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME} = process.env;
+const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME, DB_DEPLOY} = process.env;
 
 
-const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
+/* const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     host: DB_HOST,
     port: DB_PORT,
     dialect: "mysql",
     logging: false,
 
-});
+}); */
+
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: "mysql",
+    logging: false,
+  });
 
 lineasModel(sequelize);
 productosModel(sequelize);
