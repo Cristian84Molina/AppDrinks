@@ -10,7 +10,7 @@ process.env.TZ = 'America/Argentina/Buenos_Aires';
 
 const cors = require('cors');
 
-router.use(cors())
+/* router.use(cors()) */
 
 //midleweares
 router.use((req, res, next) => {
