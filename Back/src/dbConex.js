@@ -13,23 +13,15 @@ const detaformaspagoModels = require('./models/DetaFormasPago');
 const cierrecajaModels = require('./models/CierreCaja');
 const transaccionesModels = require('./models/Transacciones');
 
-//const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME, DB_DEPLOY} = process.env;
+const {DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME} = process.env;
 
 
-/* const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
     host: DB_HOST,
     port: DB_PORT,
     dialect: "mysql",
     logging: false,
 
-}); */
-
-const {dbUrl} = process.env;
-
-
-const sequelize = new Sequelize(dbUrl, {
-  dialect: 'mysql', // Asegúrate de especificar el dialecto correctamente
-  logging: false, // Puedes ajustar la configuración de logging según tus necesidades
 });
 
 lineasModel(sequelize);
