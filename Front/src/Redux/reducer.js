@@ -1,6 +1,6 @@
 import {GET_ARTICLES} from "./actions";
 const initialState = {
-   rutaPrincipal: "http://localhost:3002/",  //https://app-drinks.vercel.app/
+   rutaPrincipal: "https://appdrinks-production.up.railway.app/",  //"http://localhost:3002/"
    tragosSelected: [],
    articlesList: [],
 };
