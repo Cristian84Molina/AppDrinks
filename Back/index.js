@@ -8,9 +8,9 @@ const port = process.env.PORT_SERVER || 3002;
 process.env.TZ = 'America/Argentina/Buenos_Aires';
 
 
-const cors = require('cors');
+/* const cors = require('cors'); */
 
-router.use(cors())
+/* router.use(cors()) */
 
 //midleweares
 router.use((req, res, next) => {
