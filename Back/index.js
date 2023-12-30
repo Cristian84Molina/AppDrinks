@@ -1,19 +1,19 @@
 const express = require("express");
-const app = express();
-const routes = require('./routes/indexRoutes');
+const router = express();
+const routes = require('./src/routes/indexRoutes');
 const morgan = require("morgan");
 require('dotenv').config();
-const {conex} = require('./dbConex');
+const {conex} = require('./src/dbConex');
 const port = process.env.PORT_SERVER || 3002;
 process.env.TZ = 'America/Argentina/Buenos_Aires';
 
 
 const cors = require('cors');
 
-app.use(cors())
+router.use(cors())
 
 //midleweares
-app.use((req, res, next) => {
+router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Credentials", "true");
     res.header(
@@ -24,14 +24,14 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(morgan("dev"));
+router.use(express.json());
+router.use(express.urlencoded({ extended: false }));
+router.use(morgan("dev"));
 
-app.use(routes);
+router.use(routes);
 
 conex.sync({ alter: true }).then(() => {
-    app.listen(port, () => {
+    router.listen(port, () => {
       console.log(`Server Running on port ${port}`);
    });
 });
