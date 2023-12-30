@@ -1,6 +1,6 @@
 import {GET_ARTICLES} from "./actions";
 const initialState = {
-   rutaPrincipal: "https://appdrinks-production.up.railway.app/",  //"http://localhost:3002/"
+   rutaPrincipal: "http://localhost:3002/",  //"http://localhost:3002/"
    tragosSelected: [],
    articlesList: [],
 };
